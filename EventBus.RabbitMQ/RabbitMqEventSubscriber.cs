@@ -49,11 +49,7 @@ namespace EventBus.RabbitMQ
             channel.QueueBind(
                 queue: _rabbitMqEventBusOptions.QueueName,
                 exchange: _rabbitMqEventBusOptions.ExchangeName,
-                routingKey: subscription.EventName,
-                arguments: new Dictionary<string, object>
-                    {
-                        {"x-dead-letter-exchange", $"{_rabbitMqEventBusOptions.ExchangeName}_error"}
-                    }
+                routingKey: subscription.EventName
             );
             channel.QueueBind(
                 queue: $"{_rabbitMqEventBusOptions.QueueName}_error",

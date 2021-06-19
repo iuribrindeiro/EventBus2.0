@@ -30,19 +30,21 @@ namespace EventBusExample
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             _eventSubscriber.Subscribe<SolicitandoGeracaoNumeroNotaEvent>();
-            for (int i = 0; i < 20; i++)
-            {
-                var concurrenceId = new Random().Next(1, 21).ToString();
-                await Task.WhenAll(new List<Task>
-                {
-                    _eventPublisher.PublishAsync(new SolicitandoGeracaoNumeroNotaEvent(concurrenceId)),
-                    _eventPublisher.PublishAsync(new SolicitandoGeracaoNumeroNotaEvent(concurrenceId)),
-                    _eventPublisher.PublishAsync(new SolicitandoGeracaoNumeroNotaEvent(concurrenceId)),
-                    _eventPublisher.PublishAsync(new SolicitandoGeracaoNumeroNotaEvent(concurrenceId)),
-                    _eventPublisher.PublishAsync(new SolicitandoGeracaoNumeroNotaEvent(concurrenceId)),
-                    _eventPublisher.PublishAsync(new SolicitandoGeracaoNumeroNotaEvent(concurrenceId)),
-                });
-            }
+            // for (int i = 0; i < 20; i++)
+            // {
+            //     var concurrenceId = new Random().Next(1, 21).ToString();
+            //     await Task.WhenAll(new List<Task>
+            //     {
+            //         _eventPublisher.PublishAsync(new SolicitandoGeracaoNumeroNotaEvent(concurrenceId)),
+            //         _eventPublisher.PublishAsync(new SolicitandoGeracaoNumeroNotaEvent(concurrenceId)),
+            //         _eventPublisher.PublishAsync(new SolicitandoGeracaoNumeroNotaEvent(concurrenceId)),
+            //         _eventPublisher.PublishAsync(new SolicitandoGeracaoNumeroNotaEvent(concurrenceId)),
+            //         _eventPublisher.PublishAsync(new SolicitandoGeracaoNumeroNotaEvent(concurrenceId)),
+            //         _eventPublisher.PublishAsync(new SolicitandoGeracaoNumeroNotaEvent(concurrenceId)),
+            //     });
+            // }
+
+            await _eventPublisher.PublishAsync(new SolicitandoGeracaoNumeroNotaEvent("1"));
             await _eventSubscriber.StartListeningAsync();
 
             var timer = new System.Timers.Timer();

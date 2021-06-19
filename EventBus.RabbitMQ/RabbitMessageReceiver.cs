@@ -62,7 +62,7 @@ namespace EventBus.RabbitMQ
                 consumerChannel.TxCommit();
             }
 
-            _logger.LogInformation($"Message handedl!");
+            _logger.LogInformation("Message handled!");
         }
     }
 }
